@@ -1,0 +1,56 @@
+{%extends 'base.html' %}
+
+{% block 'conteudo' %}
+<div class="container">
+    <br>
+
+    <p>
+        <label>Nome do livro:</label>
+        <input class="form-control" value="{{livro.nome}}" type="text">
+    </p>
+    
+    <p>
+        <label>Nome do Autor:</label>
+        <input style="width: 30%;" class="form-control" value="{{livro.autor}}" type="text">
+    </p>
+
+    <p>
+        <label>Nome do Co-autor:</label>
+        <input style="width: 30%;"  class="form-control" value="{{livro.co_autor}}" type="text">
+    </p>
+
+     <p>
+        <label>Data de cadastro no sistema:</label>
+        <input style="width: 30%;"  class="form-control" value="{{livro.data_cadastro}}" type="text">
+    </p>
+
+    <label>Categoria do livro:</label>
+    <br>
+<select style="width: 30%;" class="form-control" name="categoria">
+    {% for i in categoria_livro %}
+    
+        <option>{{i}}</option>
+    {% endfor %}
+    </select>
+
+    <br>
+    <br>
+
+    <label>Livro disponível: &nbsp &nbsp </label>
+        {% if livro.emprestado %}
+        
+         <input style="transform: scale(1.5)" type="checkbox" name="Livro não disponível">
+
+        {% else %}
+
+        <input style="transform: scale(1.5);" checked type="checkbox" name="Livro disponível">
+        
+        {% endif %}
+        
+    <br>
+    <br>
+
+    <input type="submit" class="btn btn-success btn-lg" value="Salvar">
+
+</div>
+{% endblock %}
