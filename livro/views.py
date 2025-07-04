@@ -1,7 +1,8 @@
 from django.shortcuts import redirect, render
 from django.http import HttpResponse
 from usuarios.models import Usuario
-from .models import Livros, Categoria
+from .models import Livros, Categoria, Emprestimo
+
 
 def home(request): 
     if request.session.get('usuario'):
@@ -17,8 +18,8 @@ def ver_livros(request, id):
      livros = Livros.objects.get(id = id)
      if request.session.get('usuario') == livros.usuario.id:
         categoria_livro = Categoria.objects.filter(usuario = request.session.get('usuario'))
-        print(categoria_livro)
-        return render(request, 'ver_livro.html', {'livro': livros, 'categoria_livro': categoria_livro})
+        emprestimos = Emprestimo.objects.filter(livro = livros)
+        return render(request, 'ver_livro.html', {'livro': livros, 'categoria_livro': categoria_livro,'emprestimos': emprestimos})
      else:
          return HttpResponse('Você não tem permissão para ver este livro!')
  
